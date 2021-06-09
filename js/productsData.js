@@ -3,7 +3,9 @@ const productsData = {
         'name': 'God of War',
         'price': 100,
         'img-url': '../images/product-photos/godOfWar.webp',
-        // 'release-date': 2018
+        'release-date': 2018,
+        'description': 'Lorem inpus Lorem inpus Lorem inpus Lorem inpus Lorem inpus',
+        'sale': 'no'
     },
     'ft13-2105': {
         'name': 'Friday the 13th: The Game',

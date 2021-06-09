@@ -1,87 +1,121 @@
 const cart = document.querySelector('.cart-positions-shell');
 let articles = localStorage.getItem('cart');
 
-
-if (articles !== null && articles !== '[]') {
-    articles = JSON.parse(articles);
-    let totalPrice = 0;
-
-    for (let elem of articles) {
-        for (let key in productsData) {
-            if (elem == key) {
-                totalPrice += productsData[key]['price'];
-                const cartPositionRender = 
-                `<div class="cart-position">
-                    <div class="photo-section">
-                        <img src="${productsData[key]['img-url']}" alt="">
-                    </div>
-                    <div class="name-section">
-                        <h2>${productsData[key]['name']}</h2>
-                    </div>
-                    <div class="count-section">
-                        <div class="count-shell">
-                            <p class="minus">-</p>
-                            <p class="count">1</p>
-                            <p class="plus">+</p>
-                        </div>
-                    </div>
-                    <div class="price-section">
-                        <p class="price">${productsData[key]['price']}</p>
-                        <p>₴ UAH</p>
-                    </div>
-                    <div class="delete-section">
-                        <img class="delete-icon" data-article='${key}' src="../icons/icons8-delete-bin-90.png"  alt="">
-                    </div>
-                </div>`;
-                cart.innerHTML += cartPositionRender;
-            }    
-        }
-    }
-
-    const totalSumRender = 
-    `<div class="total-block-shell">
-        <div class="total-sum">
-            <p>Total: ${totalPrice}₴ UAH</p>
-        </div>
-    </div>`;
-    cart.innerHTML += totalSumRender;
-
-
-    // ------ deleteButton ------
-    cart.addEventListener('click', e => {
-        if (e.target.classList.contains('delete-icon')) {
-            const currentArticle = e.target.getAttribute('data-article');
-            for (let i = 0; i < articles.length; i++) {
-                if (articles[i] === currentArticle) {
-                    articles.splice(i, 1);
-                }
-            }
-            location.reload()
-            localStorage.setItem('cart', JSON.stringify(articles));
-        }
-        // ------ plusMinusButtons ------
-        else if (e.target.classList.contains('minus')) {
-            const currentArticle = e.target.parentNode;
-            const count = currentArticle.querySelector('.count');
-            if (count.innerHTML > 1) count.innerHTML = +count.innerHTML - 1;
-        }
-        else if (e.target.classList.contains('plus')) {
-            const countParent = e.target.parentNode;
-            // const currentArticle = countParent.getAttribute('data-article');
-            const count = countParent.querySelector('.count');
-            count.innerHTML = +count.innerHTML + 1;
-
-            const coreParent = e.target.parentNode.parentNode.parentNode;
-            const priceElem = coreParent.querySelector('.price');
-            const price = +priceElem.innerHTML;
-            priceElem.innerHTML = +(price + price);
-        }
-    });
-}
-else {
+function emptyCartFunc() {
     const emptyCart = 
     `<div class="else-case">
         <p>Your cart is empty...</p>
     </div>`;
     cart.innerHTML = emptyCart;
+}
+
+
+if (articles !== null && articles !== '{}') {
+    articles = JSON.parse(articles);
+    let totalPrice = 0;
+
+    for (let key in articles) {
+        totalPrice += +articles[key]['price'];
+        const cartPositionRender = 
+        `<div class="cart-position">
+            <div class="photo-section">
+                <img src="${articles[key]['img-url']}" alt="">
+            </div>
+            <div class="name-section">
+                <h2>${articles[key]['name']}</h2>
+            </div>
+            <div class="count-section">
+                <div class="count-shell" data-article='${key}'>
+                    <p class="minus">-</p>
+                    <p class="count">${articles[key]['count']}</p>
+                    <p class="plus">+</p>
+                </div>
+            </div>
+            <div class="price-section">
+                <p class="price">${articles[key]['price']}</p>
+                <p>₴ UAH</p>
+            </div>
+            <div class="delete-section">
+                <img class="delete-icon" data-article='${key}' src="../icons/icons8-delete-bin-90.png"  alt="">
+            </div>
+        </div>`;
+        cart.innerHTML += cartPositionRender;
+    }
+
+    
+    const totalPriceRender = 
+    `<div class="total-block-shell">
+        <div class="total-sum">
+            <p>Total: <span class="sum">${totalPrice}</span>₴ UAH</p>
+        </div>
+    </div>`;
+    cart.innerHTML += totalPriceRender;
+    
+
+
+    // ------ deleteButton ------
+    cart.addEventListener('click', e => {
+        const sum = document.querySelector('.sum');
+        if (e.target.classList.contains('delete-icon')) {
+            const currentArticle = e.target.dataset.article;
+            const currentPrice = articles[currentArticle]['price'];
+            totalPrice = totalPrice - currentPrice
+            delete articles[currentArticle];
+
+            const productCard = e.target.parentNode.parentNode;
+            productCard.remove();
+
+            sum.innerHTML = totalPrice;
+
+            if (Object.keys(articles).length == 0) {
+                const totalPriceBlock = document.querySelector('.total-block-shell');
+                totalPriceBlock.remove();
+                emptyCartFunc();
+            }
+            localStorage.setItem('cart', JSON.stringify(articles));
+        }
+        // ------ plusMinusButtons ------
+        else if (e.target.classList.contains('minus')) {
+            const countParent = e.target.parentNode;
+            const count = countParent.querySelector('.count');
+            const currentArticle = countParent.dataset.article;
+            if (count.innerHTML > 1) {
+                count.innerHTML -= 1;
+                
+                const coreParent = e.target.parentNode.parentNode.parentNode;
+                const price = coreParent.querySelector('.price');
+                const firstPrice = +articles[currentArticle]['first-price'];
+                if (price.innerHTML >= firstPrice) price.innerHTML = price.innerHTML - firstPrice;
+
+                totalPrice -= firstPrice;
+                sum.innerHTML = totalPrice;
+
+                articles[currentArticle]['count'] = +count.innerHTML;
+                articles[currentArticle]['price'] = +price.innerHTML;
+            }
+            localStorage.setItem('cart', JSON.stringify(articles));
+        }
+        else if (e.target.classList.contains('plus')) {
+            const countParent = e.target.parentNode;
+            const count = countParent.querySelector('.count');
+            const currentArticle = countParent.dataset.article;
+            count.innerHTML = +count.innerHTML + 1;
+            
+            const coreParent = e.target.parentNode.parentNode.parentNode;
+            const price = coreParent.querySelector('.price');
+            const firstPrice = +articles[currentArticle]['first-price'];
+            price.innerHTML = +price.innerHTML + firstPrice;
+
+            totalPrice += firstPrice;
+            sum.innerHTML = totalPrice;
+
+            articles[currentArticle]['count'] = +count.innerHTML;
+            articles[currentArticle]['price'] = +price.innerHTML;
+
+            localStorage.setItem('cart', JSON.stringify(articles));
+        }
+    });
+}
+else {
+    emptyCartFunc();
 }

@@ -104,7 +104,7 @@ function productCardRender(article, imgUrl, name, price) {
 // }
 
 
-let cartPositions = [];
+let cartPositions = {};
 if (localStorage.getItem('cart') !== null) {
     cartPositions = localStorage.getItem('cart');
     cartPositions = JSON.parse(cartPositions);
@@ -112,8 +112,15 @@ if (localStorage.getItem('cart') !== null) {
 
 goods.addEventListener('click', e => {
     if (e.target.classList.contains('clickable-area_product')) {
-        const article = e.target.getAttribute('data-article');
-        if (cartPositions.includes(article) === false) cartPositions.push(article);
+        const article = e.target.dataset.article;
+        for (let key in productsData) {
+            if (article == key) {
+                key[cartPositions] = key;
+                cartPositions[key] = productsData[key];
+                cartPositions[key]['count'] = 1;
+                cartPositions[key]['first-price'] = cartPositions[key]['price'];
+            }
+        }
     }
     localStorage.setItem('cart', JSON.stringify(cartPositions));
 });
