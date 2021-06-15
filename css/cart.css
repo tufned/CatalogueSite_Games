@@ -1,4 +1,4 @@
-.cart-icon {
+.cart-icon-shell {
     background-color: rgb(234, 236, 245);
 }
 
@@ -18,14 +18,14 @@
 .cart-position {
     width: 80%;
     height: 140px;
-    background-color: #fff;
-    box-shadow: 0 0 80px 0 rgb(71 71 71 / 10%);
+    background-color: rgb(34, 34, 34);
     border-radius: 30px;
     display: grid;
     grid-row: 1;
     grid-column: 5;
     grid-template-columns: 140px 1fr 20% 18% 9%;
     margin: 1% 0;
+    border: 1px solid rgb(48, 48, 48);
 }
 
 .delete-section, .photo-section, .count-section, .price-section, .count-shell, .minus, .plus, .total-sum {
@@ -50,7 +50,7 @@
 
 .count-shell {
     border-radius: 50px;
-    border: 1px solid rgb(234, 236, 245);
+    border: 1px solid rgb(71, 71, 71);
     justify-content: space-between;
     height: 25%;
     width: 60%;
@@ -65,12 +65,12 @@
     width: 35%;
     transition: all .15s ease;
     user-select: none;
+    border-radius: 50px;
 }
 
 .minus:hover, .plus:hover {
     cursor: pointer;
-    background-color: rgb(234, 236, 245);
-    border-radius: 50px;
+    background-color: rgb(71, 71, 71);
 }
 
 
@@ -82,7 +82,7 @@
     border-radius: 10px;
 }
 .delete-icon:hover {
-    background-color: rgb(234, 236, 245);
+    background-color: rgb(71, 71, 71);
     cursor: pointer;
 }
 

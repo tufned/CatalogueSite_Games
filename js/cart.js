@@ -1,5 +1,5 @@
 const cart = document.querySelector('.cart-positions-shell');
-let articles = localStorage.getItem('cart');
+// articles announced in script.js
 
 function emptyCartFunc() {
     const emptyCart = 
@@ -66,6 +66,7 @@ if (articles !== null && articles !== '{}') {
             productCard.remove();
 
             sum.innerHTML = totalPrice;
+            if (cartProductsAmount.innerHTML > 0) cartProductsAmount.innerHTML = +cartProductsAmount.innerHTML - 1;
 
             if (Object.keys(articles).length == 0) {
                 const totalPriceBlock = document.querySelector('.total-block-shell');
