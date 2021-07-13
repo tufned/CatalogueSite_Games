@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/mainPage.css">
 </head>
 <body>
     <div class="container">
@@ -46,10 +46,86 @@
         
         <div class="sidebar_empty"></div>
         
+
         <div class="main">
+            <header class="header">
+                <div class="page-title">
+                    <h1>ShopName</h1>
+                </div>
+                <div class="search-block-shell">
+                    <div class="search-block">
+                        <input class="search" type="text" placeholder="Type a name of a game">
+                        <img class="search-icon" src="../icons/icons8-search.png" alt="">
+                    </div>
+                    <div class="search-results hide">
+                        <!-- <div class="search-result">red dead redemption</div> -->
+                    </div>
+                </div>
+            </header>
             
+            <section class="slider-block-shell">
+                <div class="slider-block"></div>
 
+                <div class="slider-block_arrow slider-block_left-arrow">
+                    <img src="/icons/icons8-back-90.png" alt="photo">
+                </div>
+                <div class="slider-block_arrow slider-block_right-arrow">
+                    <img src="/icons/icons8-forward-90.png" alt="photo">
+                </div>;
+                <div class="slider-block_dots"></div>
+            </section>
 
+            <section class="slogan">
+                <h1>A lot of PS4 and PS5 games <br> for resonable price</h1>
+            </section>
+
+            <section class="sales-and-categories-shell">
+                <div class="categories-block">
+                    <div class="categories">
+                        <h2>Games Categories</h2>
+                        <ul class="categories-list">
+                            <li class="category">All Games</li>
+                            <li class="category">Action-Adventure</li>
+                            <li class="category">Shooter</li>
+                            <li class="category">RPG</li>
+                            <li class="category">Online</li>
+                            <li class="category">Open World</li>
+                            <li class="category">Survival</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="best-offers-block">
+                    <h2>Best Offers</h2>
+
+                    <div class="products_best-offers"></div>                        
+                </div>
+            </section>
+
+            <div class="game-compilations">
+                <section>
+                    <div class="page-subtitle">
+                        <h2>New Releases</h2>
+                        <div class="line line-after"></div>
+                    </div>
+                    <div class="new-releases result-block"></div>
+                </section>
+
+                <section>
+                    <div class="page-subtitle">
+                        <h2>Hits</h2>
+                        <div class="line line-after"></div>
+                    </div>
+                    <div class="hit-products result-block"></div>
+                </section>
+
+                <section>
+                    <div class="page-subtitle">
+                        <h2>Your Cart</h2>
+                        <div class="line line-after"></div>
+                    </div>
+                    <div class="cart-products result-block"></div>
+                </section>
+            </div>
         </div>
     </div>
 
@@ -57,5 +133,6 @@
 
     <script src="js/productsData.js"></script>
     <script src="../js/script.js"></script>
+    <script src="../js/mainPage.js"></script>
 </body>
 </html>
