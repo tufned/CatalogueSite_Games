@@ -26,9 +26,6 @@ body {
 }
 
 
-.hide {
-    display: none;
-}
 
 
 
@@ -167,6 +164,12 @@ body {
 
 
 /* SEARCH */
+.search-block-shell {
+    position: relative;
+    display: flex;
+}
+
+
 .search-block {
     display: flex;
     align-items: center;
@@ -380,3 +383,16 @@ body {
 
 
 /* /Product */
+
+
+
+
+
+
+
+
+
+
+.hide {
+    display: none;
+}

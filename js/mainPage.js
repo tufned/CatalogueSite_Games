@@ -226,7 +226,7 @@ bestOffersParent.addEventListener('click', e => {
 
 // filter by category (remembering category)
 const categories = document.querySelector('.categories');
-const pageHref = 'http://127.0.0.1:5500/html/all-products.html';
+const pageHref = 'http://127.0.0.1:5500/html/all-products.html';    //  INCORRECT LINK
 let filter_category = {};
 
 categories.addEventListener('click', e => {

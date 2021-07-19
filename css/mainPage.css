@@ -69,7 +69,7 @@
     right: 0;
 }
 .slider-block_photo:hover {
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .slider-block_arrow {

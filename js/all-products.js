@@ -13,7 +13,7 @@ const moreGamesCard = `<div class="product red">
                     </div>`;
 
 
-const searchResBlock = document.querySelector('.search-results');
+// const searchResBlock = document.querySelector('.search-results');
 
 
 const filterSelect = document.querySelector('.filter-select');
@@ -34,11 +34,11 @@ if (goods) {
         const price = `${productsData[key]['price']}₴ UAH`;
         productCardRender(goods, article, img, name, price);  // in script.js
 
-        const div = document.createElement('div');
-        div.classList.add('search-result');
-        div.classList.add('hide');
-        div.innerHTML = name;
-        searchResBlock.append(div);
+        // const div = document.createElement('div');
+        // div.classList.add('search-result');
+        // div.classList.add('hide');
+        // div.innerHTML = name;
+        // searchResBlock.append(div);
 
         if (Object.keys(filter_category).length !== 0 && Object.keys(filter_category)[0] !== 'all games') {
             for (let option of filterSelectOptions) {
@@ -93,8 +93,6 @@ filterSelect.addEventListener('change', () => {
             filter_category[filterSelect_value] = names;
         }
 
-        console.log(filter_category);
-
         for (let product of products) {
             if (Object.keys(filter_category)[0] !== 'all games') {
                 const filteredProductsNames = filter_category[Object.keys(filter_category)[0]];
@@ -140,74 +138,12 @@ goods.addEventListener('click', e => {
 
 
 
-// search
-const searchInput = document.querySelector('.search');
-const searchIcon = document.querySelector('.search-icon');
-const searchResultBlocks = document.querySelectorAll('.search-result');
-const searchResulstShell = document.querySelector('.search-results');
-
-
-window.addEventListener('click', e => {
-    if (e.target.classList.contains('search')) {
-        searchInput.addEventListener('input', searchResultsFunc);
-        searchInput.addEventListener('focus', searchResultsFunc);
-    }
-    else if (e.target.classList.contains('search-result')) {
-        searchInput.value = e.target.innerHTML;
-        productNameChecking();
-        searchResulstShell.classList.add('hide');
-    }
-    else if (e.target.classList.contains('search-button')) {
-        productNameChecking();
-        searchResulstShell.classList.add('hide');
-    }
-    else if (e.target.classList.contains('search-icon')) {
-        const value = searchInput.value.trim().toLowerCase();
-        if (value != '') {
-            for (let elem of products) {
-                elem.classList.remove('hide');
-            }
-            searchInput.value = '';
-            searchIcon.src = '../icons/icons8-search.png';
-            searchIcon.classList.remove('clear-search-icon');
-            for (let elem of searchResultBlocks) {
-                elem.classList.add('hide');
-            }
-        }
-    }
-    else {
-        searchResulstShell.classList.add('hide');
-    }
-    
-});
-
-
-
-function searchResultsFunc() {
-    searchResulstShell.classList.remove('hide');
-    const value = searchInput.value.trim().toLowerCase();
-    if (value != '') {
-        for (let elem of searchResultBlocks) {
-            const productName_correct = elem.innerHTML.trim().toLowerCase(); 
-            if (productName_correct.search(value) == -1) elem.classList.add('hide');
-            else elem.classList.remove('hide');
-        }
-        searchIcon.src = '../icons/icons8-clear-search-90.png';
-        searchIcon.classList.add('clear-search-icon');
-    }
-    else {
-        searchIcon.src = '../icons/icons8-search.png';
-        searchIcon.classList.remove('clear-search-icon');
-    }
-}
-
-function productNameChecking() {
-    const value = searchInput.value.trim().toLowerCase();
-        if (value != '') {
-            for (let elem of products) { 
-                const productName_correct = elem.querySelector('.product-name').innerHTML.trim().toLowerCase(); 
-                if (productName_correct.search(value) == -1) elem.classList.add('hide');
-                else elem.classList.remove('hide');
-            }
-        }
+// search (extra)
+if (localStorage.getItem('searchResult') !== null) {
+    const searchResValue = localStorage.getItem('searchResult');
+    localStorage.removeItem('searchResult');
+    searchInput.value = searchResValue;
+    productNameChecking();
+    searchIcon.src = '../icons/icons8-clear-search-90.png';
+    searchIcon.classList.add('clear-search-icon');
 }

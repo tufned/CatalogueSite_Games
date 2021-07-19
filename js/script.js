@@ -75,8 +75,6 @@ function productCardRender(parent, article, imgUrl, name, price) {
 
 
 
-
-
 function addedProductRender(element) {
     const elem = element;
     elem.querySelector('.add-to-cart-icon').src = '../icons/icons8-checkout-90.png';
@@ -94,4 +92,98 @@ function addedProductRender(element) {
     elem.querySelector('.clickable-area_product').addEventListener('click', () => {
         document.location.href = '/html/cart.html';
     });
+}
+
+
+
+
+const searchResulstShell = document.querySelector('.search-results');
+
+for (let key in productsData) {
+    const div = document.createElement('div');
+    div.classList.add('search-result');
+    div.classList.add('hide');
+    div.innerHTML = productsData[key]['name'];
+    searchResulstShell.append(div);
+}
+
+
+// search
+const searchInput = document.querySelector('.search');
+const searchIcon = document.querySelector('.search-icon');
+const searchResultBlocks = document.querySelectorAll('.search-result');
+
+
+window.addEventListener('click', e => {
+    if (e.target.classList.contains('search')) {
+        searchInput.addEventListener('input', searchResultsFunc);
+        searchInput.addEventListener('focus', searchResultsFunc);
+    }
+    else if (e.target.classList.contains('search-result')) {
+        if (window.location.href.search('index.html') != -1) {
+            searchInput.value = e.target.innerHTML;
+            window.location.href = 'http://127.0.0.1:5500/html/all-products.html';  //  INCORRECT LINK
+            localStorage.setItem('searchResult', searchInput.value);
+        }
+        else {
+            searchInput.value = e.target.innerHTML;
+            productNameChecking();
+            searchResulstShell.classList.add('hide');
+        }
+    }
+    else if (e.target.classList.contains('search-button')) {
+        productNameChecking();
+        searchResulstShell.classList.add('hide');
+    }
+    else if (e.target.classList.contains('search-icon')) {
+        const value = searchInput.value.trim().toLowerCase();
+        if (value != '') {
+            for (let elem of products) {
+                elem.classList.remove('hide');
+            }
+            searchInput.value = '';
+            searchIcon.src = '../icons/icons8-search.png';
+            searchIcon.classList.remove('clear-search-icon');
+            for (let elem of searchResultBlocks) {
+                elem.classList.add('hide');
+            }
+        }
+    }
+    // else if (e.target.classList.contains('slider-block_photo')) {
+    // }
+    else {
+        searchResulstShell.classList.add('hide');
+    }
+    
+});
+
+
+
+function searchResultsFunc() {
+    searchResulstShell.classList.remove('hide');
+    const value = searchInput.value.trim().toLowerCase();
+    if (value != '') {
+        for (let elem of searchResultBlocks) {
+            const productName_correct = elem.innerHTML.trim().toLowerCase(); 
+            if (productName_correct.search(value) == -1) elem.classList.add('hide');
+            else elem.classList.remove('hide');
+        }
+        searchIcon.src = '../icons/icons8-clear-search-90.png';
+        searchIcon.classList.add('clear-search-icon');
+    }
+    else {
+        searchIcon.src = '../icons/icons8-search.png';
+        searchIcon.classList.remove('clear-search-icon');
+    }
+}
+
+function productNameChecking() {
+    const value = searchInput.value.trim().toLowerCase();
+        if (value != '') {
+            for (let elem of products) { 
+                const productName_correct = elem.querySelector('.product-name').innerHTML.trim().toLowerCase(); 
+                if (productName_correct.search(value) == -1) elem.classList.add('hide');
+                else elem.classList.remove('hide');
+            }
+        }
 }
