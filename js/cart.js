@@ -25,6 +25,10 @@ if (articles !== null && articles !== '{}') {
                 <h2>${articles[key]['name']}</h2>
             </div>
             <div class="count-section">
+                <div class="price_mobile-view">
+                    <p class="price">${articles[key]['price']}</p>
+                    <p>₴ UAH</p>
+                </div>
                 <div class="count-shell" data-article='${key}'>
                     <p class="minus">-</p>
                     <p class="count">${articles[key]['count']}</p>
@@ -84,15 +88,17 @@ if (articles !== null && articles !== '{}') {
                 count.innerHTML -= 1;
                 
                 const coreParent = e.target.parentNode.parentNode.parentNode;
-                const price = coreParent.querySelector('.price');
+                const priceElems = coreParent.querySelectorAll('.price');
                 const firstPrice = +articles[currentArticle]['first-price'];
-                if (price.innerHTML >= firstPrice) price.innerHTML = price.innerHTML - firstPrice;
+                for (let elem of priceElems) {
+                    if (elem.innerHTML >= firstPrice) elem.innerHTML = elem.innerHTML - firstPrice;
+                }
 
                 totalPrice -= firstPrice;
                 sum.innerHTML = totalPrice;
 
                 articles[currentArticle]['count'] = +count.innerHTML;
-                articles[currentArticle]['price'] = +price.innerHTML;
+                articles[currentArticle]['price'] = +priceElems[0].innerHTML;
             }
             localStorage.setItem('cart', JSON.stringify(articles));
         }
@@ -103,15 +109,17 @@ if (articles !== null && articles !== '{}') {
             count.innerHTML = +count.innerHTML + 1;
             
             const coreParent = e.target.parentNode.parentNode.parentNode;
-            const price = coreParent.querySelector('.price');
+            const priceElems = coreParent.querySelectorAll('.price');
             const firstPrice = +articles[currentArticle]['first-price'];
-            price.innerHTML = +price.innerHTML + firstPrice;
+            for (let elem of priceElems) {
+                elem.innerHTML = +elem.innerHTML + firstPrice;
+            }
 
             totalPrice += firstPrice;
             sum.innerHTML = totalPrice;
 
             articles[currentArticle]['count'] = +count.innerHTML;
-            articles[currentArticle]['price'] = +price.innerHTML;
+            articles[currentArticle]['price'] = +priceElems[0].innerHTML;
 
             localStorage.setItem('cart', JSON.stringify(articles));
         }
