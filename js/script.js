@@ -80,6 +80,9 @@ function addedProductRender(element) {
     elem.querySelector('.add-to-cart-icon').src = '../icons/icons8-checkout-90.png';
     elem.querySelector('.add-to-cart').innerHTML = 'GO TO CART';
     elem.querySelector('.product-footer_onhover').classList.add('added');
+    elem.querySelector('.product-footer_onhover').addEventListener('mouseenter', () => {
+        elem.querySelector('.product-child').style.backgroundColor = 'rgb(255, 83, 99)';
+    });
     elem.querySelector('.product-footer_onhover').addEventListener('mousemove', () => {
         elem.querySelector('.product-child').style.backgroundColor = 'rgb(255, 83, 99)';
     });
@@ -122,7 +125,7 @@ window.addEventListener('click', e => {
     else if (e.target.classList.contains('search-result')) {
         if (window.location.href.search('index.html') != -1) {
             searchInput.value = e.target.innerHTML;
-            window.location.href = 'http://127.0.0.1:5500/html/all-products.html';  //  INCORRECT LINK
+            window.location.href = 'https://tufned.github.io/CatalogueSite_Games/html/all-products.html';  //  LINK
             localStorage.setItem('searchResult', searchInput.value);
         }
         else {

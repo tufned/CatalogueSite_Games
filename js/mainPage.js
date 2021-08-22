@@ -113,7 +113,7 @@ for (let key in productsData) {
     const gameMonth = +productsData[key]['options']['release-date'][0];
     const gameYear = +productsData[key]['options']['release-date'][1];
     if (currentYear == gameYear) {
-        if (currentMounth == gameMonth || currentMounth - 1 == gameMonth || currentMounth - 2 == gameMonth) {
+        if (currentMounth == gameMonth || currentMounth - 1 == gameMonth || currentMounth - 2 == gameMonth || currentMounth - 3 == gameMonth) {
             const article = key;
             const img = productsData[key]['img-url'];
             const name = productsData[key]['name'];
@@ -199,6 +199,7 @@ gameCompilationsArea.addEventListener('click', e => {
         cartPositions[article]['count'] = 1;
         cartPositions[article]['first-price'] = cartPositions[article]['price'];
         cartProductsAmount.innerHTML = +cartProductsAmount.innerHTML + 1;
+        product.style.animationName = 'adding-to-cart';
 
         addedProductRender(product);
     }
@@ -215,6 +216,7 @@ bestOffersParent.addEventListener('click', e => {
         cartPositions[article]['count'] = 1;
         cartPositions[article]['first-price'] = cartPositions[article]['price'];
         cartProductsAmount.innerHTML = +cartProductsAmount.innerHTML + 1;
+        product.style.animationName = 'adding-to-cart';
 
         addedProductRender_bestOffer(product);
     }
@@ -226,7 +228,7 @@ bestOffersParent.addEventListener('click', e => {
 
 // filter by category (remembering category)
 const categories = document.querySelector('.categories');
-const pageHref = 'http://127.0.0.1:5500/html/all-products.html';    //  INCORRECT LINK
+const pageHref = 'https://tufned.github.io/CatalogueSite_Games/html/all-products.html';    //  LINK
 let filter_category = {};
 
 categories.addEventListener('click', e => {

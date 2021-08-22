@@ -127,6 +127,7 @@ goods.addEventListener('click', e => {
         cartPositions[article]['count'] = 1;
         cartPositions[article]['first-price'] = cartPositions[article]['price'];
         cartProductsAmount.innerHTML = +cartProductsAmount.innerHTML + 1;
+        product.style.animationName = 'adding-to-cart';
 
         addedProductRender(product);
     }

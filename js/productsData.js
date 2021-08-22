@@ -133,6 +133,28 @@ const productsData = {
             'release-date': [6, 2020],
          },
     },
+    'itt-2108': {
+        'name': 'It Takes Two',
+        'price': 100,
+        'img-url': '../images/product-photos/itt.webp',
+        'options': {
+            'category': ['online', 'action-adventure'],
+            'best-offer': false,
+            'hit': false,
+            'release-date': [3, 2021],
+         },
+    },
+    'chvlr2-2108': {
+        'name': 'Chivalry 2',
+        'price': 90,
+        'img-url': '../images/product-photos/chvlr2.jpg',
+        'options': {
+            'category': ['survival', 'online'],
+            'best-offer': false,
+            'hit': false,
+            'release-date': [4, 2021],
+         },
+    },
     'mdmx-2106': {
         'name': 'Mad Max',
         'price': 75,
