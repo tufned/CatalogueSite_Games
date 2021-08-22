@@ -8,7 +8,7 @@ It contains a search bar, a big slider, categories to quick navigation and some 
 ![main page](README_extra/mainPage_3.png "main page")
 
 -------
-#### In the left side there is a sidebar. With it help a visitor can switch between 4 pages:
+### In the left side there is a sidebar. With it help a visitor can switch between 4 pages:
 - index page
 - page with all products
 - info page
@@ -23,5 +23,5 @@ Cart (with memory)
 
 ------
 
+<img src="README_extra/adaptive.png" alt="adaptive look" width="300">
 And the photo of adaptive look.
-![adaptive look](README_extra/adaptive.png "adaptive look")
