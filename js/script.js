@@ -4,11 +4,13 @@ const cartProductsAmount = document.querySelector('.cart-products-amount');
 
 
 if (articles !== null && articles !== '{}') {
-    cartIcon.src = '../icons/icons8-buying-90.png';
+    if (window.location.href.search('index.html') != -1) cartIcon.src = 'icons/icons8-buying-90.png';
+    else cartIcon.src = '../icons/icons8-buying-90.png';
     cartProductsAmount.innerHTML = Object.keys(JSON.parse(articles)).length;
 }
 else {
-    cartIcon.src = '../icons/icons8-shopping-cart-90.png';
+    if (window.location.href.search('index.html') != -1) cartIcon.src = 'icons/icons8-shopping-cart-90.png';
+    else cartIcon.src = '../icons/icons8-shopping-cart-90.png';
     cartProductsAmount.innerHTML = 0;
 }
 
@@ -62,7 +64,8 @@ function productCardRender(parent, article, imgUrl, name, price) {
     productFooter_onhover.append(productFooter_rS_onhover);
     const img_onhover = document.createElement('img');
     img_onhover.classList.add('add-to-cart-icon');
-    img_onhover.src = '../icons/icons8-add-shopping-cart-90.png';
+    if (window.location.href.search('index.html') != -1) img_onhover.src = 'icons/icons8-add-shopping-cart-90.png';
+    else img_onhover.src = '../icons/icons8-add-shopping-cart-90.png';
     productFooter_rS_onhover.append(img_onhover);
 
     const productChild = document.createElement('div');
@@ -77,7 +80,8 @@ function productCardRender(parent, article, imgUrl, name, price) {
 
 function addedProductRender(element) {
     const elem = element;
-    elem.querySelector('.add-to-cart-icon').src = '../icons/icons8-checkout-90.png';
+    if (window.location.href.search('index.html') != -1) elem.querySelector('.add-to-cart-icon').src = 'icons/icons8-checkout-90.png';
+    else elem.querySelector('.add-to-cart-icon').src = '../icons/icons8-checkout-90.png';
     elem.querySelector('.add-to-cart').innerHTML = 'GO TO CART';
     elem.querySelector('.product-footer_onhover').classList.add('added');
     elem.querySelector('.product-footer_onhover').addEventListener('mouseenter', () => {
@@ -93,7 +97,7 @@ function addedProductRender(element) {
     priceElem.innerHTML = 'ADDED TO CART';
     priceElem.style.color = 'rgb(79, 201, 116)';
     elem.querySelector('.clickable-area_product').addEventListener('click', () => {
-        document.location.href = '/html/cart.html';
+        document.location.href = 'https://tufned.github.io/CatalogueSite_Games/html/cart.html';  // LINK
     });
 }
 
@@ -145,7 +149,8 @@ window.addEventListener('click', e => {
                 elem.classList.remove('hide');
             }
             searchInput.value = '';
-            searchIcon.src = '../icons/icons8-search.png';
+            if (window.location.href.search('index.html') != -1) searchIcon.src = 'icons/icons8-search.png';
+            else searchIcon.src = '../icons/icons8-search.png';
             searchIcon.classList.remove('clear-search-icon');
             for (let elem of searchResultBlocks) {
                 elem.classList.add('hide');
@@ -171,11 +176,13 @@ function searchResultsFunc() {
             if (productName_correct.search(value) == -1) elem.classList.add('hide');
             else elem.classList.remove('hide');
         }
-        searchIcon.src = '../icons/icons8-clear-search-90.png';
+        if (window.location.href.search('index.html') != -1) searchIcon.src = 'icons/icons8-clear-search-90.png';
+        else searchIcon.src = '../icons/icons8-clear-search-90.png';
         searchIcon.classList.add('clear-search-icon');
     }
     else {
-        searchIcon.src = '../icons/icons8-search.png';
+        if (window.location.href.search('index.html') != -1) searchIcon.src = 'icons/icons8-search.png';
+        else searchIcon.src = '../icons/icons8-search.png';
         searchIcon.classList.remove('clear-search-icon');
     }
 }

@@ -160,7 +160,8 @@ for (let product of products) {
 
 function addedProductRender_bestOffer(element) {
     const elem = element;
-    elem.querySelector('.add-to-cart-icon').src = '../icons/icons8-checkout-90.png';
+    if (window.location.href.search('index.html') != -1) elem.querySelector('.add-to-cart-icon').src = 'icons/icons8-checkout-90.png';
+    else elem.querySelector('.add-to-cart-icon').src = '../icons/icons8-checkout-90.png';
     elem.querySelector('.add-to-cart').innerHTML = 'GO TO CART';
     elem.querySelector('.product-footer_onhover').classList.add('added');
     
@@ -176,7 +177,7 @@ function addedProductRender_bestOffer(element) {
     priceElem.innerHTML = 'ADDED TO CART';
     priceElem.style.color = 'rgb(79, 201, 116)';
     elem.querySelector('.clickable-area_product').addEventListener('click', () => {
-        document.location.href = '/html/cart.html';
+        document.location.href = 'https://tufned.github.io/CatalogueSite_Games/html/cart.html';
     });
 }
 

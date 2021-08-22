@@ -29,7 +29,7 @@ if (localStorage.getItem('filter_category') !== null) {
 if (goods) {
     for (let key in productsData) {
         const article = key;
-        const img = productsData[key]['img-url'];
+        const img = `../${productsData[key]['img-url']}`;
         const name = productsData[key]['name'];
         const price = `${productsData[key]['price']}₴ UAH`;
         productCardRender(goods, article, img, name, price);  // in script.js

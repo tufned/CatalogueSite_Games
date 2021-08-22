@@ -19,7 +19,7 @@ if (articles !== null && articles !== '{}') {
         const cartPositionRender = 
         `<div class="cart-position">
             <div class="photo-section">
-                <img src="${articles[key]['img-url']}" alt="">
+                <img src="../${articles[key]['img-url']}" alt="">
             </div>
             <div class="name-section">
                 <h2>${articles[key]['name']}</h2>
