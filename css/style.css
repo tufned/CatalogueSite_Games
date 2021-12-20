@@ -318,7 +318,7 @@ body {
     padding: 2px 2px 0 2px;
     position: relative;
     border: 1px solid rgb(48, 48, 48);
-    margin: 2px 8px;
+    margin: 2% 1%;
 
     animation: .2s ease;
 }
@@ -613,6 +613,11 @@ body {
 }
 
 @media (max-width: 768px) {
+    .main {
+        margin-bottom: 50px;
+    }
+
+
     .page-title h1 {
         font-size: 45px;
     }
@@ -671,10 +676,6 @@ body {
     .add-to-cart {
         font-size: 12px;
     }
-
-    .goods {
-        padding-bottom: 70px;
-    }
 }
 
 
@@ -720,7 +721,7 @@ body {
     .product {
         width: 160px;
         height: 210px;
-        margin: 0 4px;
+        margin: 3% 1%;
         border-radius: 30px;
     }
     .product-main {

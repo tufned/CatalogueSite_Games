@@ -86,6 +86,10 @@ function sliderPagesMove_forward() {
 
 
 
+
+
+
+
 // BEST OFFERS
 const bestOffersParent = document.querySelector('.products_best-offers');
 const newReleasesParent = document.querySelector('.new-releases');
@@ -134,10 +138,20 @@ for (let key in productsData) {
 
 
 
+if (newReleasesParent.innerHTML == '') {
+    newReleasesParent.innerHTML = `<p>No new releases yet :(</p>`;
+} 
+
+
+
+
+
+
+
 
 articles = JSON.parse(articles);
 // checking added products
-const products = document.querySelectorAll('.product');
+products = document.querySelectorAll('.product');
 for (let product of products) {
     if (product.parentNode != bestOffersParent) {
         for (let key in articles) {

@@ -1,6 +1,7 @@
 let articles = localStorage.getItem('cart');
 const cartIcon = document.querySelector('.cart-icon');
 const cartProductsAmount = document.querySelector('.cart-products-amount');
+let products = document.querySelectorAll('.product');
 
 
 if (articles !== null && articles !== '{}') {
@@ -13,6 +14,15 @@ else {
     else cartIcon.src = '../icons/icons8-shopping-cart-90.png';
     cartProductsAmount.innerHTML = 0;
 }
+
+
+
+const goods = document.querySelector('.goods');
+const goodsElemsArr = [];
+
+let url = new URL(location.href);
+if (url.searchParams.get('page') == null) url.searchParams.set('page', 1);
+
 
 
 
@@ -71,6 +81,10 @@ function productCardRender(parent, article, imgUrl, name, price) {
     const productChild = document.createElement('div');
     productChild.classList.add('product-child');
     mainDiv.append(productChild);
+
+
+
+    goodsElemsArr.push(mainDiv);
 } 
 
 
@@ -82,6 +96,7 @@ function addedProductRender(element) {
     const elem = element;
     if (window.location.href.search('index.html') != -1) elem.querySelector('.add-to-cart-icon').src = 'icons/icons8-checkout-90.png';
     else elem.querySelector('.add-to-cart-icon').src = '../icons/icons8-checkout-90.png';
+    
     elem.querySelector('.add-to-cart').innerHTML = 'GO TO CART';
     elem.querySelector('.product-footer_onhover').classList.add('added');
     elem.querySelector('.product-footer_onhover').addEventListener('mouseenter', () => {
@@ -152,6 +167,7 @@ window.addEventListener('click', e => {
             if (window.location.href.search('index.html') != -1) searchIcon.src = 'icons/icons8-search.png';
             else searchIcon.src = '../icons/icons8-search.png';
             searchIcon.classList.remove('clear-search-icon');
+            
             for (let elem of searchResultBlocks) {
                 elem.classList.add('hide');
             }
@@ -188,12 +204,19 @@ function searchResultsFunc() {
 }
 
 function productNameChecking() {
+    document.querySelector('.buttons-section').classList.add('hide');
+
     const value = searchInput.value.trim().toLowerCase();
-        if (value != '') {
-            for (let elem of products) { 
-                const productName_correct = elem.querySelector('.product-name').innerHTML.trim().toLowerCase(); 
-                if (productName_correct.search(value) == -1) elem.classList.add('hide');
-                else elem.classList.remove('hide');
+    if (value != '') {
+        for (let elem of goodsElemsArr) {
+            const productName_correct = elem.querySelector('.product-name').innerHTML.trim().toLowerCase();
+            if (productName_correct.search(value) == -1) {
+                elem.classList.add('hide');
+            }
+            else {
+                elem.classList.remove('hide');
+                goods.append(elem);
             }
         }
+    }
 }
